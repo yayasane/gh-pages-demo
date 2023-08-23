@@ -22,6 +22,7 @@ jobs:
         run: npm run test
   build:
     runs-on: ubuntu-latest
+    needs: test
     steps:
       - name: Code
         uses: actions/checkout@v3
@@ -31,10 +32,11 @@ jobs:
           node-version: 18
       - name: Install
         run: npm install
-      - name: Test
+      - name: Build
         run: npm run build
   deploy:
     runs-on: ubuntu-latest
+    needs: build
     steps:
       - name: Code
         uses: actions/checkout@v3
