@@ -1,18 +1,10 @@
-name: Test React APp
+name: Build and Deploy
 on:
-  pull_request:
-    types:
-      - opened
   workflow_dispatch:
-  push:
-    branches:
-      - main
-      - "hotfix-*"
-      - "feature/**"
-    path-ignore:
-      - ".github/workflows/*"
+permissions:
+  contents: write
 jobs:
-  test:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Code
@@ -23,5 +15,10 @@ jobs:
           node-version: 18
       - name: Install
         run: npm install
-      - name: Test
-        run: npm run test
+      - name: Build
+        run: npm run build
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: build
+          branch: gh-pages
