@@ -16,7 +16,7 @@ jobs:
       - name: Install
         run: npm install
       - name: Test
-        run: npm run test > test
+        run: npm run test > test.txt
       - name: Upload Test
         uses: actions/upload-artifact@v3
         with:
